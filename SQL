@@ -1,1 +1,51 @@
+Create Database ProgPoE2
+use ProgPoE2
 
+Create table Lecturer (
+LecturerID int identity (1,1) not null,
+LecturerName varchar (55) not null,
+AccPassword varchar (35) not null,
+Role varchar(15) not null
+CONSTRAINT PK_LecturerName Primary Key(LecturerName)
+);
+
+insert into Lecturer (LecturerName, AccPassword, Role)
+VALUES ('A', 'A', 'Lecturer'),
+('B', 'B', 'Lecturer')
+
+drop table Lecturer
+
+Create table Programme_Coordinator (
+Programme_CoordinatorID int identity (1,1) not null,
+PcName varchar (55) not null,
+AccPassword varchar (35) not null,
+Role varchar(55) not null
+CONSTRAINT PK_Programme_CoordinatorID Primary Key(Programme_CoordinatorID)
+);
+
+insert into Programme_Coordinator (PcName, AccPassword, Role)
+VALUES ('Sana', 'password456', 'Programme Coordinator')
+
+Create table Academic_Manager (
+Academic_ManagerID int identity (1,1) not null,
+AmName varchar (55) not null,
+AccPassword varchar (35) not null,
+Role varchar(55) not null,
+CONSTRAINT PK_Academic_Manager Primary Key(Academic_ManagerID)
+);
+
+insert into Academic_Manager (AmName, AccPassword, Role)
+VALUES ('Hana', 'password', 'Academic Manager')
+
+CREATE TABLE Claims (
+ClaimId INT IDENTITY(1,1) not null,
+LecturerName VARCHAR(55) not null,
+HoursWorked INT not null,
+HourlyRate INT not null,
+AdditionalNotes VARCHAR(MAX),
+Status VARCHAR(15),
+CONSTRAINT PK_ClaimId Primary Key(ClaimId),
+CONSTRAINT FK_LecturerName Foreign Key (LecturerName) references Lecturer (LecturerName)
+);
+
+Select * from Claims;
