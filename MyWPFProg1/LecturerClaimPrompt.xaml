@@ -1,0 +1,18 @@
+﻿<Window x:Class="WPFPoE2.LecturerClaimPrompt" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Lecturer Claim Submission" Height="450" Width="800">
+    <Grid>
+        <Label Content="Welcome Lecturer, Would you like to submit a claim?" HorizontalAlignment="Left" Margin="173,26,0,0" VerticalAlignment="Top" Width="416"/>
+        <Label Content="Hours Worked" HorizontalAlignment="Left" Margin="49,94,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="HoursWorkedTextBox" HorizontalAlignment="Left" Margin="160,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Height="39"/>
+        <Label Content="Hourly Rate" HorizontalAlignment="Left" Margin="49,156,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="HourlyRateTextBox" HorizontalAlignment="Left" Margin="160,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Height="39"/>
+        <Label Content="Additional Notes" HorizontalAlignment="Left" Margin="49,215,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="AdditionalNotesTextBox" HorizontalAlignment="Left" Margin="160,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="123"/>
+        <Button x:Name="SubmitClaimBtn" Content="Submit Claim" HorizontalAlignment="Left" Margin="592,238,0,0" VerticalAlignment="Top" Width="152" Height="54" Click="Button_Click_1"/>
+        <Button x:Name="UploadDocBtn" Content="Upload Documents" HorizontalAlignment="Left" Margin="257,353,0,0" VerticalAlignment="Top" Width="191" Click="Button_Click"/>
+        <Button x:Name="ViewmyClaims" Content="View my Claims" HorizontalAlignment="Left" Margin="572,100,0,0" VerticalAlignment="Top" Width="192" Click="Button_Click_2"/>
+        <TextBlock x:Name="UploadedFilesTextBlock" HorizontalAlignment="Left" Margin="49,330,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Width="400"/>
+    </Grid>
+</Window>
