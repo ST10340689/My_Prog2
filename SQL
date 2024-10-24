@@ -13,8 +13,6 @@ insert into Lecturer (LecturerName, AccPassword, Role)
 VALUES ('A', 'A', 'Lecturer'),
 ('B', 'B', 'Lecturer')
 
-drop table Lecturer
-
 Create table Programme_Coordinator (
 Programme_CoordinatorID int identity (1,1) not null,
 PcName varchar (55) not null,
@@ -49,3 +47,6 @@ CONSTRAINT FK_LecturerName Foreign Key (LecturerName) references Lecturer (Lectu
 );
 
 Select * from Claims;
+Select * from Academic_Manager;
+Select * from Programme_Coordinator;
+Select * from Lecturer;
