@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows;
@@ -19,8 +19,8 @@ namespace WPFPoE2
         {
             List<Claim> pendingClaims = new List<Claim>();
 
-            // Adjusted to reflect column names in your database
-            string query = "SELECT ClaimId, LecturerName, AdditionalNotes FROM Claims WHERE Status = 'Pending'";
+            // Load All pending claims
+            string query = "SELECT ClaimId, LecturerName, AdditionalNotes, Status, HoursWorked, HourlyRate FROM Claims";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -36,7 +36,11 @@ namespace WPFPoE2
                         {
                             ClaimId = reader.GetInt32(0),
                             LecturerName = reader.GetString(1),
-                            AdditionalNotes = reader.GetString(2)
+                            AdditionalNotes = reader.GetString(2),
+                            Status = reader.GetString(3),
+                            HoursWorked = reader.GetInt32(4),
+                            HourlyRate = reader.GetInt32(5),
+
                         };
                         pendingClaims.Add(claim);
                     }
