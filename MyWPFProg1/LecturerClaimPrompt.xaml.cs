@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -12,7 +12,7 @@ namespace WPFPoE2
         private List<string> uploadedFileNames = new List<string>();
         private string connectionString = "Server=labg9aeb3\\sqlexpress;Database=ProgPoE2;Trusted_Connection=True;";
 
-        // Replace this with the logic to retrieve the currently logged-in lecturer's ID
+        //Retrieve the currently logged-in lecturer's ID
         private int currentUserId = 1; // Example: assuming the logged-in user has ID 1
 
         public LecturerClaimPrompt()
@@ -161,14 +161,14 @@ namespace WPFPoE2
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    conn.Open(); // Try to open the connection
-                    return true; // Connection is successful
+                    conn.Open(); //Try to open the connection
+                    return true; //Connection is successful
                 }
             }
             catch (SqlException sqlEx)
             {
                 MessageBox.Show($"Connection error: {sqlEx.Message}");
-                return false; // Connection failed
+                return false; //Connection failed
             }
         }
 
