@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
@@ -19,13 +19,13 @@ namespace WPFPoE2
             string name = UsernameTextBox.Text; 
             string password = PasswordBox.Password; 
 
-            if (IsLecturer(name, password))
+            if (IsLecturer(name, password)) //If the user is a Lecturer it will open the LecturerClaimPrompt window
             {
                 LecturerClaimPrompt lecturerView = new LecturerClaimPrompt();
                 lecturerView.Show();
                 this.Hide();
             }
-            else if (IsAcademicManagerOrCoordinator(name, password))
+            else if (IsAcademicManagerOrCoordinator(name, password)) //If the user is an Academic Manager Or Coordinator it will open the Academic_Manager window
             {
                 Academic_Manager managerWindow = new Academic_Manager();
                 managerWindow.Show();
@@ -33,7 +33,7 @@ namespace WPFPoE2
             }
             else
             {
-                MessageBox.Show("Invalid credentials. Please try again.");
+                MessageBox.Show("Invalid credentials. Please try again."); //If the login is wrong this error is displayed
             }
         }
 
