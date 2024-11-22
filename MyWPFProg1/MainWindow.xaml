@@ -1,8 +1,8 @@
-﻿<Window x:Class="WPFPoE2.MainWindow"
+<Window x:Class="WPFPoE2.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#7f8c56">
         <Label Content="Username:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="200"/>
 
