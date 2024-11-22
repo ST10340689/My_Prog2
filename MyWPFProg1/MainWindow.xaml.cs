@@ -19,24 +19,30 @@ namespace WPFPoE2
             string name = UsernameTextBox.Text; 
             string password = PasswordBox.Password; 
 
-            if (IsLecturer(name, password))
+            if (IsLecturer(name, password)) //If the user is a Lecturer it will open the LecturerClaimPrompt window
             {
                 LecturerClaimPrompt lecturerView = new LecturerClaimPrompt();
                 lecturerView.Show();
                 this.Hide();
             }
-            else if (IsAcademicManagerOrCoordinator(name, password))
+            else if (IsAcademicManagerOrCoordinator(name, password)) //If the user is an Academic Manager Or Coordinator it will open the Academic_Manager window
             {
                 Academic_Manager managerWindow = new Academic_Manager();
                 managerWindow.Show();
                 this.Hide();
             }
+            else if (IsHR(name, password)) //If the user is an apart of HR it will open the Academic_Manager window
+            {
+                HRView managerWindow = new HRView();
+                managerWindow.Show();
+                this.Hide();
+            }
             else
             {
-                MessageBox.Show("Invalid credentials. Please try again.");
+                MessageBox.Show("Invalid credentials. Please try again."); //If the login is wrong this error is displa3yed
             }
         }
-
+        
         private bool IsLecturer(string LecturerName, string AccPassword)
         {
             string query = "SELECT COUNT(*) FROM Lecturer WHERE LecturerName = @LecturerName AND AccPassword = @AccPassword";
@@ -75,6 +81,24 @@ namespace WPFPoE2
                 {
                     count += reader.GetInt32(0);
                 }
+
+                return count > 0;
+            }
+        }
+
+        private bool IsHR(string HrName, string HrPassword)
+        {
+            string query = "SELECT COUNT(*) FROM HR_View WHERE HrName = @HrName AND HrPassword = @HrPassword";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@HrName", HrName);
+                cmd.Parameters.AddWithValue("@HrPassword", HrPassword);
+
+                conn.Open();
+                int count = (int)cmd.ExecuteScalar();
 
                 return count > 0;
             }

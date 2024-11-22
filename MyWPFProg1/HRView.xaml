@@ -1,0 +1,25 @@
+﻿<Window x:Class="WPFPoE2.HRView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFPoE2"
+        mc:Ignorable="d"
+        Title="HRView" Height="450" Width="800">
+    <Grid Background='#9c906e'>
+
+        <Button Background="#5d698f" x:Name="GenerateInvoiceButton" Content="Generate Invoice/Report"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,50,0,0" Width="200" Height="50" Click="GenerateInvoiceButton_Click"/>
+        <TextBlock x:Name="ReportStatusTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,120,0,0" TextWrapping="Wrap" FontWeight="Bold"/>
+
+        <Label Content="Lecturer ID:" HorizontalAlignment="Left"  Margin="50,200,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LecturerIdTextBox" HorizontalAlignment="Left" Margin="150,200,0,0" VerticalAlignment="Top" Width="200"/>
+
+        <Label Content="New Name:" HorizontalAlignment="Left" Margin="50,250,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NewNameTextBox" HorizontalAlignment="Left" Margin="150,250,0,0" VerticalAlignment="Top" Width="200"/>
+
+        <Label Content="New Password:" HorizontalAlignment="Left" Margin="50,300,0,0" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="NewPasswordBox" HorizontalAlignment="Left"  Margin="150,300,0,0" VerticalAlignment="Top" Width="200"/>
+
+        <Button x:Name="UpdateLecturerButton" Content="Update Lecturer Info" HorizontalAlignment="Left" Margin="150,350,0,0" VerticalAlignment="Top" Width="200" Click="UpdateLecturerButton_Click"/>
+    </Grid>
+</Window>

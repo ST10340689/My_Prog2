@@ -4,15 +4,18 @@
         Title="Lecturer Claim Submission" Height="450" Width="800">
     <Grid>
         <Label Content="Welcome Lecturer, Would you like to submit a claim?" HorizontalAlignment="Left" Margin="173,26,0,0" VerticalAlignment="Top" Width="416"/>
-        <Label Content="Hours Worked" HorizontalAlignment="Left" Margin="49,94,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="HoursWorkedTextBox" HorizontalAlignment="Left" Margin="160,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Height="39"/>
-        <Label Content="Hourly Rate" HorizontalAlignment="Left" Margin="49,156,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="HourlyRateTextBox" HorizontalAlignment="Left" Margin="160,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Height="39"/>
+        <Label Content="Hours Worked" HorizontalAlignment="Left" Margin="54,94,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="HoursWorkedTextBox" HorizontalAlignment="Left" Margin="160,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Height="39" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Hourly Rate" HorizontalAlignment="Left" Margin="63,158,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="HourlyRateTextBox" HorizontalAlignment="Left" Margin="160,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Height="39" TextChanged="TextBox_TextChanged"/>
         <Label Content="Additional Notes" HorizontalAlignment="Left" Margin="49,215,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="AdditionalNotesTextBox" HorizontalAlignment="Left" Margin="160,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="123"/>
         <Button x:Name="SubmitClaimBtn" Content="Submit Claim" HorizontalAlignment="Left" Margin="592,238,0,0" VerticalAlignment="Top" Width="152" Height="54" Click="Button_Click_1"/>
-        <Button x:Name="UploadDocBtn" Content="Upload Documents" HorizontalAlignment="Left" Margin="257,353,0,0" VerticalAlignment="Top" Width="191" Click="Button_Click"/>
+        <Button x:Name="UploadDocBtn" Content="Upload Documents" HorizontalAlignment="Left" Margin="258,370,0,0" VerticalAlignment="Top" Width="191" Click="Button_Click"/>
         <Button x:Name="ViewmyClaims" Content="View my Claims" HorizontalAlignment="Left" Margin="572,100,0,0" VerticalAlignment="Top" Width="192" Click="Button_Click_2"/>
-        <TextBlock x:Name="UploadedFilesTextBlock" HorizontalAlignment="Left" Margin="49,330,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Width="400"/>
+        <TextBlock x:Name="UploadedFilesTextBlock" HorizontalAlignment="Left" Margin="49,349,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Width="400"/>
+        <Label Content="Final Payment" HorizontalAlignment="Left" Margin="57,189,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FinalPaymentTextBlock" HorizontalAlignment="Left" Margin="160,194,0,0" VerticalAlignment="Top" Width="300" FontWeight="Bold" />
+
     </Grid>
 </Window>

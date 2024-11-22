@@ -11,8 +11,6 @@ namespace WPFPoE2
     {
         private List<string> uploadedFileNames = new List<string>();
         private string connectionString = "Server=labg9aeb3\\sqlexpress;Database=ProgPoE2;Trusted_Connection=True;";
-
-        // Replace this with the logic to retrieve the currently logged-in lecturer's ID
         private int currentUserId = 1; // Example: assuming the logged-in user has ID 1
 
         public LecturerClaimPrompt()
@@ -49,23 +47,17 @@ namespace WPFPoE2
 
         private void StoreFileSecurely(string filePath)
         {
-            // Define the directory to store the uploaded files
-            string directoryPath = "C:\\SecureUploads"; // Change this to your secure directory
+            string directoryPath = "C:\\SecureUploads";
 
-            // Ensure the directory exists
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
             }
 
-            // Generate a unique file name to avoid conflicts
             string fileName = Path.GetFileName(filePath);
             string newFilePath = Path.Combine(directoryPath, Guid.NewGuid().ToString() + "_" + fileName);
 
-            // Copy the file to the secure directory
-            File.Copy(filePath, newFilePath, true); // true to overwrite if the file already exists
-
-            // Add the uploaded file name to the list
+            File.Copy(filePath, newFilePath, true);
             uploadedFileNames.Add(fileName);
         }
 
@@ -78,40 +70,42 @@ namespace WPFPoE2
                 return;
             }
 
-            string HoursWorkedText = HoursWorkedTextBox.Text;
-            string HourlyRateText = HourlyRateTextBox.Text;
-            string AdditionalNotes = AdditionalNotesTextBox.Text;
-
-            // Validate inputs
-            if (string.IsNullOrEmpty(HoursWorkedText) || string.IsNullOrEmpty(HourlyRateText))
+            if (!int.TryParse(HoursWorkedTextBox.Text, out int HoursWorked) || HoursWorked < 0)
             {
-                MessageBox.Show("Please fill in hours worked and hourly rate.");
+                MessageBox.Show("Please enter a valid, non-negative value for hours worked.");
                 return;
             }
 
-            if (!int.TryParse(HoursWorkedText, out int HoursWorked) || !int.TryParse(HourlyRateText, out int HourlyRate))
+            if (!int.TryParse(HourlyRateTextBox.Text, out int HourlyRate) || HourlyRate < 0)
             {
-                MessageBox.Show("Please enter valid numeric values for hours worked and hourly rate.");
+                MessageBox.Show("Please enter a valid, non-negative value for hourly rate.");
                 return;
             }
 
-            SubmitClaimToDatabase(LecturerName, HoursWorked, HourlyRate, AdditionalNotes);
+            // Auto-calculate final payment
+            int FinalPayment = HoursWorked * HourlyRate;
+            FinalPaymentTextBlock.Text = $"Calculated Payment: R{FinalPayment}";
+
+            if (MessageBox.Show($"Submit claim with calculated payment of R{FinalPayment}?", "Confirm Submission", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                SubmitClaimToDatabase(LecturerName, HoursWorked, HourlyRate, AdditionalNotesTextBox.Text, FinalPayment);
+            }
         }
 
         private string GetLecturerName(int userId)
         {
             string lecturerName = string.Empty;
-            string query = "SELECT LecturerName FROM Lecturer WHERE LecturerID = @UserId"; // Adjust if using a different identifier
+            string query = "SELECT LecturerName FROM Lecturer WHERE LecturerID = @UserId";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@UserId", userId); // Use the int userId
+                cmd.Parameters.AddWithValue("@UserId", userId);
 
                 try
                 {
                     conn.Open();
-                    lecturerName = cmd.ExecuteScalar() as string; // Execute and retrieve the name
+                    lecturerName = cmd.ExecuteScalar() as string;
                 }
                 catch (Exception ex)
                 {
@@ -122,7 +116,7 @@ namespace WPFPoE2
             return lecturerName;
         }
 
-        private void SubmitClaimToDatabase(string LecturerName, int HoursWorked, int HourlyRate, string AdditionalNotes)
+        private void SubmitClaimToDatabase(string LecturerName, int HoursWorked, int HourlyRate, string AdditionalNotes, int FinalPayment)
         {
             if (!VerifyDatabaseConnection())
             {
@@ -130,7 +124,8 @@ namespace WPFPoE2
                 return;
             }
 
-            string query = "INSERT INTO Claims (LecturerName, HoursWorked, HourlyRate, AdditionalNotes, Status) VALUES (@LecturerName, @HoursWorked, @HourlyRate, @AdditionalNotes, @Status)";
+            string query = "INSERT INTO Claims (LecturerName, HoursWorked, HourlyRate, AdditionalNotes, Status, FinalPayment) " +
+                           "VALUES (@LecturerName, @HoursWorked, @HourlyRate, @AdditionalNotes, @Status, @FinalPayment)";
             string Status = "Pending";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -141,6 +136,7 @@ namespace WPFPoE2
                 cmd.Parameters.AddWithValue("@HourlyRate", HourlyRate);
                 cmd.Parameters.AddWithValue("@AdditionalNotes", AdditionalNotes);
                 cmd.Parameters.AddWithValue("@Status", Status);
+                cmd.Parameters.AddWithValue("@FinalPayment", FinalPayment);
 
                 try
                 {
@@ -150,7 +146,7 @@ namespace WPFPoE2
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while submitting the claim: {ex.Message}\n{ex.StackTrace}");
+                    MessageBox.Show($"An error occurred while submitting the claim: {ex.Message}");
                 }
             }
         }
@@ -161,14 +157,14 @@ namespace WPFPoE2
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    conn.Open(); // Try to open the connection
-                    return true; // Connection is successful
+                    conn.Open();
+                    return true;
                 }
             }
             catch (SqlException sqlEx)
             {
                 MessageBox.Show($"Connection error: {sqlEx.Message}");
-                return false; // Connection failed
+                return false;
             }
         }
 
@@ -179,5 +175,25 @@ namespace WPFPoE2
             claimListWindow.Show();
             this.Close();
         }
+
+        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            // Ensure both textboxes contain valid numeric values
+            if (int.TryParse(HoursWorkedTextBox.Text, out int hoursWorked) && hoursWorked >= 0 &&
+                int.TryParse(HourlyRateTextBox.Text, out int hourlyRate) && hourlyRate >= 0)
+            {
+                // Calculate the final payment
+                int finalPayment = hoursWorked * hourlyRate;
+
+                // Display the calculated payment in the FinalPaymentTextBlock
+                FinalPaymentTextBlock.Text = $"R{finalPayment}";
+            }
+            else
+            {
+                // Clear the final payment display if inputs are invalid
+                FinalPaymentTextBlock.Text = "Invalid input";
+            }
+        }
+
     }
 }

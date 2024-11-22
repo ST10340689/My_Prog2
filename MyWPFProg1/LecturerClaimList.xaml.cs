@@ -17,7 +17,7 @@ namespace WPFPoE2
 
         private void LoadClaims(string lecturerName)
         {
-            // Update the query to select the new fields
+            //Selects the tables and fields to display in the claim list
             string query = "SELECT ClaimId, LecturerName, HoursWorked, HourlyRate, AdditionalNotes, Status FROM Claims WHERE LecturerName = @LecturerName";
 
             List<Claim> claims = new List<Claim>();
@@ -44,7 +44,7 @@ namespace WPFPoE2
                         });
                     }
 
-                    // Check if claims list is empty
+                    // Check if claims list is empty (This really doesnt matter)
                     if (claims.Count == 0)
                     {
                         MessageBox.Show("You have no claims submitted.");
