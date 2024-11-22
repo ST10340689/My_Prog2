@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#7f8c56">
-        <Label Content="Username:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="194,164,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Margin="289,168,0,0" VerticalAlignment="Top" Width="200"/>
 
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="100,50,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="196,0,0,0" VerticalAlignment="Center"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="289,0,0,0" VerticalAlignment="Center" Width="200"/>
 
-        <Button Content="Login" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="339,265,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
     </Grid>
 </Window>
