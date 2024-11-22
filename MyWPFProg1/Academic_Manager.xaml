@@ -1,8 +1,8 @@
-﻿<Window x:Class="WPFPoE2.Academic_Manager"
+<Window x:Class="WPFPoE2.Academic_Manager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Academic_Manager" Height="450" Width="800">
-    <Grid Background="#9518e2">
+    <Grid Background="#7f8c56">
         <ListView x:Name="ClaimListView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="543" Height="300"
                   SelectionChanged="ClaimListView_SelectionChanged">
             <ListView.View>
@@ -18,7 +18,7 @@
         </ListView>
         <TextBlock HorizontalAlignment="Left" Margin="594,10,0,0" Text="Details of Selected Claim:" VerticalAlignment="Top" FontWeight="Bold" />
         <TextBox x:Name="ClaimDetailsTextBox" HorizontalAlignment="Left" Margin="591,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Height="150" IsReadOnly="True" />
-        <Button Content="Approve" HorizontalAlignment="Left" Margin="647,202,0,0" VerticalAlignment="Top" Width="90" Click="Approve_Click"/>
-        <Button Content="Reject" HorizontalAlignment="Left" Margin="647,271,0,0" VerticalAlignment="Top" Width="90" Click="Reject_Click"/>
+        <Button Background="#43945b" Content="Approve" HorizontalAlignment="Left" Margin="647,202,0,0" VerticalAlignment="Top" Width="90" Click="Approve_Click"/>
+        <Button Background="#ff6161" Content="Reject" HorizontalAlignment="Left" Margin="647,271,0,0" VerticalAlignment="Top" Width="90" Click="Reject_Click"/>
     </Grid>
 </Window>
