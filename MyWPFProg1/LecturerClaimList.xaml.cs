@@ -17,7 +17,7 @@ namespace WPFPoE2
 
         private void LoadClaims(string lecturerName)
         {
-            //Selects the tables and fields to display in the claim list
+            //Selects the tables and fields to display in the claim li3st
             string query = "SELECT ClaimId, LecturerName, HoursWorked, HourlyRate, AdditionalNotes, Status FROM Claims WHERE LecturerName = @LecturerName";
 
             List<Claim> claims = new List<Claim>();
